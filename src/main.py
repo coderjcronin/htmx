@@ -1,5 +1,6 @@
 from textnode import *
 from htmlnode import *
+from split_node_delimiter import split_nodes_delimiter
 
 def main():
     pass
