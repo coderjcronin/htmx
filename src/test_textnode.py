@@ -13,11 +13,11 @@ class TestTextNode(unittest.TestCase):
         node4 = TextNode("This is a new test", TextType.CODE, "https://google.com")
         self.assertEqual(node3, node4)
 
-        node5 = TextNode("This shoudl fail", TextType.NORMAL)
-        node6 = TextNode("", TextType.NORMAL)
+        node5 = TextNode("This shoudl fail", TextType.TEXT)
+        node6 = TextNode("", TextType.TEXT)
         self.assertNotEqual(node5, node6)
 
-        node7 = TextNode("This shoudl fail", TextType.NORMAL, " ")
+        node7 = TextNode("This shoudl fail", TextType.TEXT, " ")
         self.assertNotEqual(node5, node7)
 
         node9 = TextNode("This shoudl fail", TextType.BOLD)
