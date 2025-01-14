@@ -1,6 +1,9 @@
 from textnode import TextNode, TextType
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
+    if text_type not in TextType:
+        raise ValueError("Can not operate with non-enumerated TextType")
+    
     new_nodes = []
     for node in old_nodes:
         if node.text_type != TextType.TEXT:
