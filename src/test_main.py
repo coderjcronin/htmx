@@ -10,6 +10,25 @@ TEST_URL = 'https://arstechnica.com'
 TEST_IMAGE = 'https://cdn.arstechnica.net/wp-content/uploads/2025/01/GettyImages-1244585198.jpg'
 TEST_STRING_FROM_ASSIGNMENT = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
 TEST_STRING_STRIPPED = "This is text with an italic word and a code block and an obi wan image and a link"
+TEST_BLOCK_1 = """First
+
+
+
+Second"""
+
+TEST_BLOCK_2 = """
+   Spaces   
+   
+   More spaces   
+   """
+
+TEST_BLOCK_3 = """# Header
+Some text
+    
+* List 1
+* List 2
+
+Final paragraph"""
 
 class test_textnode_to_html_conversion(unittest.TestCase):
     def test_error(self):
@@ -91,3 +110,21 @@ class test_textnode_to_html_conversion(unittest.TestCase):
             reconstruct_string += result.text
 
         self.assertEqual(reconstruct_string, TEST_STRING_STRIPPED, "Expected reconstructed string from TextNodes")
+
+    def test_block_one(self):
+        results = main.markdown_to_blocks(TEST_BLOCK_1)
+
+        self.assertEqual(2, len(results), "Expected 2 blocks")
+        for result in results:
+            self.assertFalse(result.startswith(' '), "Expected no leading whitespace")
+            self.assertFalse(result.endswith(' '), "Expected no trailing whitespace")
+            self.assertFalse(result == '', "Expected non-empty block")
+
+    def test_block_two(self):
+        results = main.markdown_to_blocks(TEST_BLOCK_2)
+
+        self.assertEqual(2, len(results), "Expected 2 blocks")
+        for result in results:
+            self.assertFalse(result.startswith(' '), "Expected no leading whitespace")
+            self.assertFalse(result.endswith(' '), "Expected no trailing whitespace")
+            self.assertFalse(result == '', "Expected non-empty block")
