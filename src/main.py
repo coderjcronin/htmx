@@ -42,21 +42,5 @@ def text_to_textnodes(text):
         temp_node = split_nodes_delimiter(temp_node, delimiter, text_type)
 
     return temp_node
-    
-def markdown_to_blocks(markdown):
-    lines = markdown.split('\n')
-    for i, line in enumerate(lines):
-        if line.isspace():
-            lines[i] = ''
-    cleaned_markdown = "\n".join(lines)
-    blocks = cleaned_markdown.split('\n\n')
-
-    cleaned_blocks = []
-    for block in blocks:
-        clean_block = block.strip()
-        if clean_block != '':
-            cleaned_blocks.append(clean_block)
-
-    return cleaned_blocks
                 
 main()
