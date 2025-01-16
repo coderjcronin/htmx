@@ -1,10 +1,10 @@
 # Imports
 import os
 import shutil
-from html_gen import generate_page
+from html_gen import generate_pages_recursive
 
 def main():
-    generate_page('./content/index.md', './template/template.html', './public/index.html')
+    generate_pages_recursive('./content', './template/template.html', './public')
 
 def setup():
     #Check for required static directory

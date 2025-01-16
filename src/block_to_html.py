@@ -55,7 +55,7 @@ def text_to_list(text):
     children = []
 
     for line in lines:
-        children.append(ParentNode( 'li', text_to_children(line.lstrip('0123456789.*- '))))
+        children.append(ParentNode( 'li', text_to_children(line.lstrip('0123456789.*-').lstrip())))
 
     return children
 

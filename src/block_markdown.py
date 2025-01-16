@@ -37,7 +37,7 @@ def block_to_block_type(incoming_block):
         for line in lines:
             if not line.startswith('- '):
                 return BlockType.PARAGRAPH
-        return BlockType.ULISTLIST
+        return BlockType.ULIST
     if incoming_block.startswith('1. '):
         x = 1
         for line in lines:
