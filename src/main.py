@@ -1,9 +1,10 @@
 # Imports
 import os
 import shutil
+from html_gen import generate_page
 
 def main():
-    pass
+    generate_page('./content/index.md', './template/template.html', './public/index.html')
 
 def setup():
     #Check for required static directory

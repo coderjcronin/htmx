@@ -18,7 +18,7 @@ class HtmlNode():
         return temp_string
     
     def __repr__(self):
-        return f"\n{self.tag}\n - value {self.value}\n - children {self.children}\n - props {self.props}"
+        return f"\n{self.tag} {type(self)}\n - value {self.value}\n - children {self.children}\n - props {self.props}"
     
 class LeafNode(HtmlNode):
     def __init__(self, value, tag = None, props = None):
@@ -43,8 +43,8 @@ class ParentNode(HtmlNode):
             raise ValueError("ParentNode has no children.")
         else:
             new_string = f"<{self.tag}>"
-            for tag in self.children:
-                new_string += tag.to_html()
+            for child in self.children:
+                new_string += child.to_html()
             new_string += f"</{self.tag}>"
 
             return new_string

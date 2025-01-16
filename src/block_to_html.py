@@ -17,7 +17,6 @@ def markdown_to_html(markdown):
     #Split markdown into blocks
     blocks = markdown_to_blocks(markdown)
 
-
     #Start processing these bad boys
     for block in blocks:
         child_nodes.append(block_to_html(block))
@@ -28,15 +27,15 @@ def block_to_html(block):
     block_type = block_to_block_type(block)
     match (block_type):
         case BlockType.HEADING:
-            return LeafNode(block, 'h1')
+            return heading_to_block(block)
         case BlockType.ULIST:
             return ParentNode( 'ul' , text_to_list(block))
         case BlockType.OLIST:
             return ParentNode( 'ol', text_to_list(block))
         case BlockType.CODE:
-            return ParentNode( 'pre' , LeafNode(block.strip('`'), 'code'))
+            return ParentNode( 'pre' , [LeafNode(block.strip('`\n'), 'code')])
         case BlockType.QUOTE:
-            return ParentNode( 'blockquote' , text_to_children(strip_quote_markdown(block)))
+            return ParentNode( 'blockquote' , [LeafNode(strip_quote_markdown(block))])
         case _: # BlockType.Paragraph and catchall... might need to cleanup
             return ParentNode( 'p' , text_to_children(block))
 
@@ -56,16 +55,30 @@ def text_to_list(text):
     children = []
 
     for line in lines:
-        children.append(LeafNode( line.lstrip('0123456789.*- '), 'li'))
+        children.append(ParentNode( 'li', text_to_children(line.lstrip('0123456789.*- '))))
 
     return children
+
+def heading_to_block(heading):
+    level = 0
+
+    for character in heading:
+        if character == "#":
+            level += 1
+        else:
+            break
+
+    if level + 1 >= len(heading) or level > 6:
+        raise ValueError(f"{level} is invalid heading value, check markdown")
+    else:
+        return LeafNode( heading[level+1:], f"h{level}")
 
 def strip_quote_markdown(text):
     lines = text.split('\n')
     new_lines = []
     for line in lines:
         new_lines.append(line.lstrip('> '))
-    return new_lines
+    return "\n".join(new_lines)
 
 def text_node_to_html_node(text_node):
     match (text_node.text_type):

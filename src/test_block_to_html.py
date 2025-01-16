@@ -11,9 +11,10 @@ TEST_STRING_STRIPPED = "This is text with an italic word and a code block and an
 TEST_CASE_1 = '''
 # Header
 
+## Header 2
+
 ```
 import re
-
 def test_filter(content):
     return re.search(r'!\\[(.*?)\\], content)
 ```
@@ -106,5 +107,8 @@ class test_textnode_to_html_conversion(unittest.TestCase):
 
         self.assertEqual(reconstruct_string, TEST_STRING_STRIPPED, "Expected reconstructed string from TextNodes")
 
+    def test_block_to_html(self):
+        test_html = markdown_to_html(TEST_CASE_1)
+        
 
 
