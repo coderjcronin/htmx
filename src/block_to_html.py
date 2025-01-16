@@ -34,7 +34,7 @@ def block_to_html(block):
         case BlockType.OLIST:
             return ParentNode( 'ol', text_to_list(block))
         case BlockType.CODE:
-            return ParentNode( 'p' , LeafNode(block.strip('`'), 'code'))
+            return ParentNode( 'pre' , LeafNode(block.strip('`'), 'code'))
         case BlockType.QUOTE:
             return ParentNode( 'blockquote' , text_to_children(strip_quote_markdown(block)))
         case _: # BlockType.Paragraph and catchall... might need to cleanup

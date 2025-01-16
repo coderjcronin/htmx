@@ -1,28 +1,20 @@
 # Imports
-from textnode import *
-from htmlnode import *
-from block_to_html import *
-from extractions import extract_markdown_images, extract_markdown_links
-from split_nodes import split_nodes_delimiter, split_nodes_link, split_nodes_image
-
-TEST_CASE_1 = '''# Header
-
-```
-import re
-def test_filter(content):
-    return re.search(r'!\\[(.*?)\\], content)
-```
-
-* This is a pain
-* OMG so much typing!
-
-![Random Image](https://picsum.photos/200/300)
-
-This is a **bold** paragraph with *emphasis* and [inline](https://boot.dev) links.'''
+import os
+import shutil
 
 def main():
-    print(markdown_to_html(TEST_CASE_1))
+    pass
+
+def setup():
+    #Check for required static directory
+    if not os.path.exists('./static'):
+        raise Exception("Missing static folder")
+
+    #Check for the public directory, delete if it exists, then recreate with a copy of static
+    if os.path.exists('./public'):
+        shutil.rmtree('./public')
+    shutil.copytree('./static', './public')
 
 
-                
+setup()
 main()
