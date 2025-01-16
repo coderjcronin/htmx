@@ -1,6 +1,7 @@
 import re
 
-from textnode import TextNode, TextType
+from local_types import TextType
+from textnode import TextNode
 from extractions import extract_markdown_images, extract_markdown_links
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):

@@ -18,7 +18,7 @@ class HtmlNode():
         return temp_string
     
     def __repr__(self):
-        return f"{self.tag}\n - value {self.value}\n - children {self.children}\n - props {self.props}"
+        return f"\n{self.tag}\n - value {self.value}\n - children {self.children}\n - props {self.props}"
     
 class LeafNode(HtmlNode):
     def __init__(self, value, tag = None, props = None):

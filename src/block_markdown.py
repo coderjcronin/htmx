@@ -1,14 +1,4 @@
-from enum import Enum
-
-class BlockType(Enum):
-    PARAGRAPH = "paragraph"
-    HEADING = "heading"
-    CODE = "code"
-    QUOTE = "quote"
-    OLIST = "ordered_list"
-    ULIST = "unordered_list"
-
-
+from local_types import BlockType
 
 def markdown_to_blocks(markdown):
     lines = markdown.split('\n')
